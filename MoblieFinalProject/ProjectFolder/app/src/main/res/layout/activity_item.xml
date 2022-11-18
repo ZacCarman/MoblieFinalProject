@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical"
-    >
+    tools:context=".itemActivity">
     <LinearLayout
         android:id="@+id/TopBar"
         android:layout_width="match_parent"
@@ -42,40 +40,9 @@
             android:text="@string/signUp"
             />
     </LinearLayout>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/welcomeTitle"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:textAlignment="center"
-        android:textSize="25dp"
+        android:layout_height="match_parent"
+        android:id="@+id/itemList"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Who Are We?"
-        android:textStyle="italic"
-        style="@style/TextAppearance.AppCompat.Headline"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/whoAreWe"
-        android:layout_margin="5dp"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="What Do We Do?"
-        android:textStyle="italic"
-        style="@style/TextAppearance.AppCompat.Headline"
-    />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/whatWeDo"
-        android:layout_margin="5dp"
-        />
-
 </LinearLayout>

@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zacca/OneDrive/Desktop/Year 4/Semester 1/Mobile App/Project/MoblieFinalProject/ProjectFolder/app/src/main/res/layout/activity_cart.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/zacca/OneDrive/Desktop/Year 4/Semester 1/Mobile App/Project/MoblieFinalProject/ProjectFolder/app/src/main/res/layout/activity_item.xml" value="0.1" />
         <entry key="..\:/Users/zacca/OneDrive/Desktop/Year 4/Semester 1/Mobile App/Project/MoblieFinalProject/ProjectFolder/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/zacca/OneDrive/Desktop/Year 4/Semester 1/Mobile App/Project/MoblieFinalProject/ProjectFolder/app/src/main/res/layout/activity_sign_up.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/zacca/OneDrive/Desktop/Year 4/Semester 1/Mobile App/Project/MoblieFinalProject/ProjectFolder/app/src/main/res/xml/itemlist.xml" value="0.22826086956521738" />
       </map>
     </option>
   </component>
