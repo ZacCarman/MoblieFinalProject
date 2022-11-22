@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -28,6 +29,7 @@ import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -57,7 +59,18 @@ public class itemActivity extends AppCompatActivity {
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("CHECK", cartList.get(0).toString());
+//                Log.d("CHECK", cartList.get(0).toString());
+                for (NumberPicker id:
+                     list_ID)
+                {
+                    Integer value = id.getValue();
+
+                    if(value > 0)
+                    {
+//                        Toast.makeText(itemActivity.this, value, Toast.LENGTH_SHORT).show();
+                        Log.d("VALUE",value.toString());
+                    }
+                }
                 Intent intent  = new Intent(getApplicationContext(), cartActivity.class);
                 startActivity(intent);
             }
@@ -77,6 +90,7 @@ public class itemActivity extends AppCompatActivity {
             }
         });
     }
+    List<NumberPicker> list_ID = new ArrayList<>();;
     private void setValues() {
         LinearLayout linearLayout = new LinearLayout(this);
         try {
@@ -209,12 +223,12 @@ public class itemActivity extends AppCompatActivity {
                 cartList.add(new Pair<String, Integer>(id,itemQuantity.getValue()));
             }
         });
-
+        list_ID.add(itemQuantity);
         linearLayout.addView(itemImage);
         linearLayout.addView(itemName);
         linearLayout.addView(itemPrice);
         linearLayout.addView(itemQuantity);
-        linearLayout.addView(btn1);
+//        linearLayout.addView(btn1);
         return linearLayout;
     }
 }
