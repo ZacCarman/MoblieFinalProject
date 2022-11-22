@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone ="no"?>
+<grocery>
+    <fruit>
+        <name>apples</name>
+        <id>A123</id>
+        <quantity>25</quantity>
+        <price>1.25</price>
+    </fruit>
+    <fruit>
+        <name>pears</name>
+        <id>P234</id>
+        <quantity>50</quantity>
+        <price>2.55</price>
+    </fruit>
+    <vegetables>
+        <name>beans</name>
+        <id>B345</id>
+        <quantity>10</quantity>
+        <price>.85</price>
+    </vegetables>
+    <vegetables>
+        <name>corn</name>
+        <id>C456</id>
+        <quantity>60</quantity>
+        <price>.50</price>
+    </vegetables>
+    <bakery>
+        <name>bread</name>
+        <id>B567</id>
+        <quantity>15</quantity>
+        <price>2.30</price>
+    </bakery>
+    <bakery>
+        <name>cake</name>
+        <id>C678</id>
+        <quantity>4</quantity>
+        <price>4.25</price>
+    </bakery>
+</grocery>
