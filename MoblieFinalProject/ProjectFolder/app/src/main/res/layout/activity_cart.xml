@@ -18,6 +18,8 @@
             android:layout_height="match_parent"
             android:text="@string/items"
             android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/itemlisticon"
+            android:textSize="10dp"
             />
         <Button
             android:id="@+id/cartButton"
@@ -25,6 +27,8 @@
             android:layout_height="match_parent"
             android:text="@string/cart"
             android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/cart"
+            android:textSize="10dp"
             />
         <Button
             android:id="@+id/signInButton"
@@ -32,12 +36,17 @@
             android:layout_height="match_parent"
             android:text="@string/signIn"
             android:layout_marginRight="10dp"
+            android:drawableLeft="@drawable/person"
+            android:textSize="10dp"
             />
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:drawableLeft="@drawable/outlineperson"
             android:text="@string/signUp"
+            android:textSize="10dp"
+            android:scaleType="fitXY"
             />
     </LinearLayout>
 </LinearLayout>

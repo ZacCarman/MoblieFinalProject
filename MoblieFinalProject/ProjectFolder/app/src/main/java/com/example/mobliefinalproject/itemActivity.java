@@ -28,6 +28,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
+import java.sql.Array;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public class itemActivity extends AppCompatActivity {
-    Button itemButton, cartButton, signInButton, signUpButton;
+    Button itemButton, cartButton, signInButton, signUpButton, addToCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class itemActivity extends AppCompatActivity {
         cartButton = findViewById(R.id.cartButton);
         signInButton = findViewById(R.id.signInButton);
         signUpButton = findViewById(R.id.signUpButton);
+        addToCart = findViewById(R.id.addToCart);
 
 
         itemButton.setOnClickListener(new View.OnClickListener() {
@@ -60,18 +62,12 @@ public class itemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                Log.d("CHECK", cartList.get(0).toString());
-                for (NumberPicker id:
-                     list_ID)
-                {
-                    Integer value = id.getValue();
 
-                    if(value > 0)
-                    {
-//                        Toast.makeText(itemActivity.this, value, Toast.LENGTH_SHORT).show();
-                        Log.d("VALUE",value.toString());
-                    }
-                }
                 Intent intent  = new Intent(getApplicationContext(), cartActivity.class);
+                for(int x = 0; x < pass_IDs.size(); x++)
+                {
+                    intent.putExtra(pass_IDs.get(x),  pass_values.get(x));
+                }
                 startActivity(intent);
             }
         });
@@ -89,8 +85,41 @@ public class itemActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (NumberPicker id:
+                        list_ID)
+                {
+                    Integer value = id.getValue();
+
+                    if(value > 0)
+                    {
+//                        Toast.makeText(itemActivity.this, value, Toast.LENGTH_SHORT).show();
+                        Log.d("VALUE",value.toString());
+                        Integer pickerID = id.getId();
+                        String passID = null;
+                        for (String ID:
+                             id_Name) {
+                            if(ID.contains(pickerID.toString()))
+                            {
+                                passID = ID;
+                            }
+                        }
+                        pass_IDs.add(passID);
+                        pass_values.add(value);
+                        Toast.makeText(itemActivity.this, "Items Added To Cart", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
     }
-    List<NumberPicker> list_ID = new ArrayList<>();;
+    List<NumberPicker> list_ID = new ArrayList<>();
+    List<String> id_Name = new ArrayList<>();
+    List<String> pass_IDs =new ArrayList<>();
+    List<Integer> pass_values =new ArrayList<>();
     private void setValues() {
         LinearLayout linearLayout = new LinearLayout(this);
         try {
@@ -212,6 +241,7 @@ public class itemActivity extends AppCompatActivity {
         itemQuantity.setMaxValue(quantity);
         itemQuantity.setMinValue(0);
         itemQuantity.setId(Integer.parseInt(id.substring(1)));
+        id_Name.add(id);
 
         Button btn1 = new Button(this);
         btn1.setText("Add Item To Cart ");
