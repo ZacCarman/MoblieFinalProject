@@ -2,7 +2,7 @@
 <grocery>
     <fruit>
         <name>apples</name>
-        <id>A123</id>
+        <id>id=A123</id>
         <quantity>25</quantity>
         <price>1.25</price>
     </fruit>
