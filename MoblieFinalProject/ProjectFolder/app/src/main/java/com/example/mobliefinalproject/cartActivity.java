@@ -17,7 +17,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 public class cartActivity extends AppCompatActivity {
-    Button itemButton, cartButton, signInButton, signUpButton;
+    Button itemButton, cartButton, signInButton, signUpButton, checkoutButton;
     RecyclerView recCart;
 
 
@@ -40,6 +40,7 @@ public class cartActivity extends AppCompatActivity {
         cartButton = findViewById(R.id.cartButton);
         signInButton = findViewById(R.id.signInButton);
         signUpButton = findViewById(R.id.signUpButton);
+        checkoutButton = findViewById(R.id.checkoutButton);
 
 
         itemButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +92,14 @@ public class cartActivity extends AppCompatActivity {
         //recCart.setAdapter(adapter);
         recCart.setLayoutManager(new LinearLayoutManager(this));
 
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), checkout.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void processData(XmlResourceParser parser, Bundle bundle) throws XmlPullParserException, IOException {
@@ -122,4 +131,4 @@ public class cartActivity extends AppCompatActivity {
 
 
         }
-    }
+    } // EOF

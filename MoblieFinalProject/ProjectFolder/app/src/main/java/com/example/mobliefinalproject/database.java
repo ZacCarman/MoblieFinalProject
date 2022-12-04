@@ -11,6 +11,7 @@ public class database extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "items.db";
     private static final int DATABASE_VERSION = 1;
+
     private static final String TABLE_NAME = "item";
     private static final String COL_ID ="id" ;
     private static final String COL_NAME = "itemName";
