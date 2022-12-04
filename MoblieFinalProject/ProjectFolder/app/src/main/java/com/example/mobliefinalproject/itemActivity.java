@@ -3,6 +3,7 @@ package com.example.mobliefinalproject;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.location.LocationRequestCompat;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -38,6 +39,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class itemActivity extends AppCompatActivity {
     Button itemButton, cartButton, signInButton, signUpButton, addToCart;
+    database myDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +143,7 @@ public class itemActivity extends AppCompatActivity {
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
                         linearLayout = printValues(getValue("name", element2), getValue("id", element2), Integer.parseInt(getValue("quantity", element2)), Double.parseDouble(getValue("price", element2)), linearLayout);
+
                     }
                 }
             }
@@ -189,6 +192,8 @@ public class itemActivity extends AppCompatActivity {
 
     private LinearLayout printValues(String name,String id, int quantity, double price, LinearLayout layout )
     {
+
+        myDb.addEntry(name, id, quantity, price);
 
         LinearLayout linearLayout = layout;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
