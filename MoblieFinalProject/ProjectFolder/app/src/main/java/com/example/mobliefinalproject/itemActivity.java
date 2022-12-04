@@ -5,6 +5,7 @@ import androidx.core.location.LocationRequestCompat;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -28,6 +29,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Array;
 import java.text.NumberFormat;
@@ -39,7 +41,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class itemActivity extends AppCompatActivity {
     Button itemButton, cartButton, signInButton, signUpButton, addToCart;
-    database myDb;
+    database db = new database(this,null,null,1);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class itemActivity extends AppCompatActivity {
         signInButton = findViewById(R.id.signInButton);
         signUpButton = findViewById(R.id.signUpButton);
         addToCart = findViewById(R.id.addToCart);
+
 
 
         itemButton.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +129,17 @@ public class itemActivity extends AppCompatActivity {
     private void setValues() {
         LinearLayout linearLayout = new LinearLayout(this);
         try {
-            InputStream is = getAssets().open("item_list.xml");
+
+
+            AssetManager assetManager = getAssets();
+
+            InputStream is = null;
+            try {
+                is = assetManager.open("item_list.xml");
+            } catch (IOException e) {
+                Log.e("tag", e.getMessage());
+            }
+
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -138,38 +152,39 @@ public class itemActivity extends AppCompatActivity {
 
             for (int i = 0; i < nList.getLength(); i++) {
 
-                {
                     Node node = nList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
+
                         linearLayout = printValues(getValue("name", element2), getValue("id", element2), Integer.parseInt(getValue("quantity", element2)), Double.parseDouble(getValue("price", element2)), linearLayout);
 
+//                        String name = getValue("name", element2);
+//                        String id = getValue("id", element2);
+//                        int quantity = Integer.parseInt(getValue("quantity", element2));
+//                        double price = Double.parseDouble(getValue("price", element2));
+
                     }
-                }
             }
             nList = doc.getElementsByTagName("vegetables");
 
             for (int i = 0; i < nList.getLength(); i++) {
 
-                {
                     Node node = nList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
                         linearLayout = printValues(getValue("name", element2), getValue("id", element2), Integer.parseInt(getValue("quantity", element2)), Double.parseDouble(getValue("price", element2)), linearLayout);
                     }
-                }
             }
             nList = doc.getElementsByTagName("bakery");
 
             for (int i = 0; i < nList.getLength(); i++) {
 
-                {
                     Node node = nList.item(i);
                     if (node.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) node;
                         linearLayout = printValues(getValue("name", element2), getValue("id", element2), Integer.parseInt(getValue("quantity", element2)), Double.parseDouble(getValue("price", element2)), linearLayout);
+
                     }
-                }
             }
         } catch (Exception e) {
             Log.d("TEST",e.toString());
@@ -193,7 +208,6 @@ public class itemActivity extends AppCompatActivity {
     private LinearLayout printValues(String name,String id, int quantity, double price, LinearLayout layout )
     {
 
-        myDb.addEntry(name, id, quantity, price);
 
         LinearLayout linearLayout = layout;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -205,7 +219,6 @@ public class itemActivity extends AppCompatActivity {
         TextView itemID = new TextView(this);
         NumberPicker itemQuantity = new NumberPicker(this);
         TextView itemPrice = new TextView(this);
-
 
 
 
@@ -252,6 +265,7 @@ public class itemActivity extends AppCompatActivity {
         btn1.setText("Add Item To Cart ");
 
 
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +277,12 @@ public class itemActivity extends AppCompatActivity {
         linearLayout.addView(itemName);
         linearLayout.addView(itemPrice);
         linearLayout.addView(itemQuantity);
-//        linearLayout.addView(btn1);
+
+
+        db.addEntry(name, id, quantity, price);
+
+
+        //linearLayout.addView(btn1);
         return linearLayout;
     }
 }

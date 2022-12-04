@@ -2,10 +2,13 @@ package com.example.mobliefinalproject;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 public class database extends SQLiteOpenHelper {
 
@@ -25,10 +28,10 @@ public class database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + "(" +
-                COL_ID + " Integer PRIMARY KEY," +
-                COL_NAME + " Text NOT NULL," +
-                COL_PRICE + " number DEFAULT 0," +
-                COL_QUANTITY + " number DEFAULT 0)" + ";" ;
+                COL_ID + " TEXT PRIMARY KEY," +
+                COL_NAME + " TEXT NOT NULL," +
+                COL_PRICE + " INTEGER DEFAULT 0," +
+                COL_QUANTITY + " DOUBLE DEFAULT 0)" + ";" ;
         db.execSQL(createTable);
 
     }
@@ -49,8 +52,38 @@ public class database extends SQLiteOpenHelper {
         values.put(COL_PRICE, price);
         values.put(COL_QUANTITY, quantity);
 
+        if (!checkID().contains(id)){
+            db.insert(TABLE_NAME, null, values);
+        }
 
-        long newRowId = db.insert(TABLE_NAME, null, values);
+
+        db.close();
+
     }
 
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        return super.getReadableDatabase();
+    }
+
+    public ArrayList<String> checkID() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorItems = db.rawQuery("SELECT id FROM " + TABLE_NAME, null);
+
+        ArrayList<String> itemModalArrayList = new ArrayList<>();
+
+        if (cursorItems.getCount()>0) {
+
+            if (cursorItems.moveToFirst()) {
+                do {
+                    // on below line we are adding the data from cursor to our array list.
+                    itemModalArrayList.add(cursorItems.getString(0));
+                } while (cursorItems.moveToNext());
+
+            }
+        }
+        return itemModalArrayList;
+    }
 }
