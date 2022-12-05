@@ -58,6 +58,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkoutUsername"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -97,12 +101,20 @@
             android:layout_toRightOf="@+id/postalCode"
             android:layout_below="@+id/exp"/>
 
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deliverySpinner"
+            android:layout_below="@id/postalCode"/>
+
+
         <Button
+            android:id="@+id/payButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Checkout"
-            android:id="@+id/payButton"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:text="Checkout" />
+
 
 
     </RelativeLayout>
