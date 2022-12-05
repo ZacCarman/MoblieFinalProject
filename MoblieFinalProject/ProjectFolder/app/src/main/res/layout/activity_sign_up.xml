@@ -6,48 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".signUpActivity"
     android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/TopBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/grey"
-        >
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/itemButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/items"
             android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/itemlisticon"
-            android:textSize="10dp"
-            />
+            android:text="@string/items"
+            android:textSize="10dp" />
+
         <Button
             android:id="@+id/cartButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/cart"
             android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/cart"
-            android:textSize="10dp"
-            />
+            android:text="@string/cart"
+            android:textSize="10dp" />
+
         <Button
             android:id="@+id/signInButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/signIn"
             android:layout_marginRight="10dp"
             android:drawableLeft="@drawable/person"
-            android:textSize="10dp"
-            />
+            android:text="@string/signIn"
+            android:textSize="10dp" />
+
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/outlineperson"
-            android:text="@string/signUp"
-            android:textSize="10dp"
             android:scaleType="fitXY"
-            />
+            android:text="@string/signUp"
+            android:textSize="10dp" />
+
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Sign Up"
+        android:textColor="@color/black"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        />
+       <EditText
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/username"
+           android:background="#30ffffff"
+           android:hint="Username"
+           android:textColor="@color/black"
+           android:textColorHint="@color/black"
+           android:layout_margin="10dp"
+           android:padding="20dp"
+           android:drawableLeft="@drawable/person"
+           android:drawablePadding="20dp"
+           ></EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password"
+        android:layout_below="@+id/username"
+        android:background="#30ffffff"
+        android:hint="Password"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/security"
+        android:drawablePadding="20dp"
+        android:inputType="textPassword"
+        ></EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repassword"
+        android:layout_below="@+id/password"
+        android:background="#30ffffff"
+        android:hint="Enter password again"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/security"
+        android:drawablePadding="20dp"
+        android:inputType="textPassword"
+        ></EditText>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RegisterButton"
+        android:text="Register"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/repassword"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        />
 </LinearLayout>

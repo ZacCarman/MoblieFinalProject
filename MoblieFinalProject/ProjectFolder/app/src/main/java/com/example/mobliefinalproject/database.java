@@ -25,6 +25,7 @@ public class database extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + "(" +
@@ -40,6 +41,8 @@ public class database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("Drop table " + TABLE_NAME + ";");
         this.onCreate(db);
+
+
     }
 
     public void addEntry(String name, String id, int quantity, double price) {
@@ -86,4 +89,35 @@ public class database extends SQLiteOpenHelper {
         }
         return itemModalArrayList;
     }
+    //insert for username and password
+    boolean insertdata(String uname, String pass)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("username",uname);
+        values.put("password",pass);
+        long result=db.insert("users",null,values);
+        if(result==1)
+            return false;
+            else
+                return true;}
+    public boolean checkusername(String username)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from users where username=?",new String[]{username});
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean checkUsernamePassword(String username, String password)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor cursor=db.rawQuery("select * from users where username=? and password=?",new String[]{username,password});
+        if(cursor.getCount()>0)
+            return true;
+        else
+            return false;
+    }
+
 }
