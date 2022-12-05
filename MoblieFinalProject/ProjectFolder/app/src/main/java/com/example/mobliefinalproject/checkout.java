@@ -99,13 +99,13 @@ public class checkout extends AppCompatActivity implements AdapterView.OnItemSel
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         switch(parent.getItemAtPosition(position).toString()){
-            case "Express (1-2 Business Days)":
+            case "Express (1-2 Business Days) + $10":
                 delivery = 10.00;
                 break;
-            case "Normal (3-5 Business Days)":
+            case "Normal (3-5 Business Days) + $5.50":
                 delivery = 5.50;
                 break;
-            case "Same Day":
+            case "Same Day + $13.95":
                 delivery = 13.95;
                 break;
         }
@@ -136,8 +136,8 @@ public class checkout extends AppCompatActivity implements AdapterView.OnItemSel
         String subTotalPass =getIntent().getStringExtra("totalCharge");
         subtotalVal = Double.parseDouble(subTotalPass);
 
-        subTotal.setText("Subtotal: $" + Double.toString(subtotalVal));
-        deliveryFeeText.setText("Delivery: $" + Double.toString(delivery));
+        subTotal.setText("Subtotal: $" + df.format(subtotalVal));
+        deliveryFeeText.setText("Delivery: $" + df.format(delivery));
         double finalFee = (subtotalVal + delivery) * TAX;
         completeTotal.setText("Total: $" + df.format(finalFee));
 

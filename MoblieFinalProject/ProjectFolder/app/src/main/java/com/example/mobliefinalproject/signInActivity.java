@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class signInActivity extends AppCompatActivity {
@@ -77,6 +78,8 @@ public class signInActivity extends AppCompatActivity {
                     {
                         Toast.makeText(signInActivity.this,"Login Sucessful", Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getApplicationContext(), itemActivity.class);
+                        //TextView username  = cartActivity.findViewById(R.id.checkoutUsername);
+                        username.setText(user);
                         startActivity(intent);
                     }
                     else{

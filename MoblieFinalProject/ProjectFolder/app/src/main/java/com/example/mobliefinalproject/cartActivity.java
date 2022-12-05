@@ -18,11 +18,13 @@ import android.widget.TextView;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class cartActivity extends AppCompatActivity {
     Button itemButton, cartButton, signInButton, signUpButton, checkoutButton;
     database db = new database(this,null,null,1);
     TextView cartText, totalText;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     double total = 0;
 
@@ -98,7 +100,7 @@ public class cartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), checkout.class);
-                intent.putExtra("totalCharge", Double.toString(total));
+                intent.putExtra("totalCharge", df.format(total));
                 startActivity(intent);
             }
         });
@@ -126,7 +128,7 @@ public class cartActivity extends AppCompatActivity {
         }
 
         cartText.setText(temp);
-        totalText.setText("Total: $" + Double.toString(total));
+        totalText.setText("Total: $" + df.format(total));
     }
 
 
