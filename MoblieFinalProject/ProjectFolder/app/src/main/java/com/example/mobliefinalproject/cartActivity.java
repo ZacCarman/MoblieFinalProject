@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -18,7 +21,8 @@ import java.io.IOException;
 
 public class cartActivity extends AppCompatActivity {
     Button itemButton, cartButton, signInButton, signUpButton, checkoutButton;
-    RecyclerView recCart;
+    database db = new database(this,null,null,1);
+    TextView cartText, totalText;
 
 
     @Override
@@ -28,11 +32,7 @@ public class cartActivity extends AppCompatActivity {
 
         Intent myIntent = getIntent();
         Bundle bundle = myIntent.getExtras();
-//        if (bundle != null) {
-//            for (String key : bundle.keySet()) {
-//                Log.e("AGRH", key + " : " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
-//            }
-//        }
+        cartText = (TextView) findViewById(R.id.cartText);
 
 
         //***********NAV BAR************************
@@ -74,7 +74,6 @@ public class cartActivity extends AppCompatActivity {
 
         //******************************END OF NAV BAR*****************************
 
-        recCart = (RecyclerView) findViewById(R.id.recCart);
         XmlResourceParser parser = getResources().getXml(R.xml.item_list);
         if(bundle != null) {
             try {
@@ -89,8 +88,9 @@ public class cartActivity extends AppCompatActivity {
         }
 
 
-        //recCart.setAdapter(adapter);
-        recCart.setLayoutManager(new LinearLayoutManager(this));
+        ScrollView scroll = new ScrollView(this);
+
+
 
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,35 +100,34 @@ public class cartActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void processData(XmlResourceParser parser, Bundle bundle) throws XmlPullParserException, IOException {
-
-        while(parser.next() != XmlResourceParser.END_DOCUMENT){
-
-            if(parser.getEventType() != XmlResourceParser.START_TAG) {
-                continue;
-            }
-                String name = parser.getName();
-
-                if (name.equals("id")) {
-                    //if(parser.getAttributeValue(null, bundle.get(key)))
-                    Log.e("AGRH", "HERE: " + parser.getAttributeValue(null, "id"));
-                    for(String key : bundle.keySet()){
-//                        if(key == parser.getAttributeValue(null, "id")){
-//
-//                        }
-                    }
-
-
-                }
-            }
+        String temp = "";
+        double total = 0;
+        int q = 0;
+        cartText = findViewById(R.id.cartText);
+        totalText = findViewById(R.id.total);
 
         for (String key : bundle.keySet()) {
             //Log.e("AGRH", key + " : " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
-            Log.e("AGRH", key);
-        }
+
+            q = (int) bundle.get(key);
+            Log.e("AGRH", key + " : " + Integer.toString(q));
+
+            String price = db.checkPrice(key);
+            String itemName = db.checkName(key);
+            Log.e("AGRH", price + " Name: " + itemName + " Quantity: " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
 
 
+            temp += itemName + " " + (bundle.get(key) != null ? bundle.get(key) : "NULL") +"\n";
+            total += (q* Double.parseDouble(price));
         }
+
+        cartText.setText(temp);
+        totalText.setText("Total: " + Double.toString(total));
+    }
+
+
     } // EOF
