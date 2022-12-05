@@ -24,6 +24,8 @@ public class cartActivity extends AppCompatActivity {
     database db = new database(this,null,null,1);
     TextView cartText, totalText;
 
+    double total = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,7 @@ public class cartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), checkout.class);
+                intent.putExtra("totalCharge", Double.toString(total));
                 startActivity(intent);
             }
         });
@@ -105,20 +108,17 @@ public class cartActivity extends AppCompatActivity {
 
     private void processData(XmlResourceParser parser, Bundle bundle) throws XmlPullParserException, IOException {
         String temp = "";
-        double total = 0;
+
         int q = 0;
         cartText = findViewById(R.id.cartText);
         totalText = findViewById(R.id.total);
 
         for (String key : bundle.keySet()) {
-            //Log.e("AGRH", key + " : " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
 
             q = (int) bundle.get(key);
-            Log.e("AGRH", key + " : " + Integer.toString(q));
 
             String price = db.checkPrice(key);
             String itemName = db.checkName(key);
-            Log.e("AGRH", price + " Name: " + itemName + " Quantity: " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
 
 
             temp += itemName + " " + (bundle.get(key) != null ? bundle.get(key) : "NULL") +"\n";
@@ -126,7 +126,7 @@ public class cartActivity extends AppCompatActivity {
         }
 
         cartText.setText(temp);
-        totalText.setText("Total: " + Double.toString(total));
+        totalText.setText("Total: $" + Double.toString(total));
     }
 
 
