@@ -51,21 +51,18 @@
             />
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:id="@+id/cartText"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/recCart">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/total"/>
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-
-
-    </LinearLayout>
     <Button
         android:id="@+id/checkoutButton"
         android:layout_width="wrap_content"
